@@ -8,13 +8,13 @@ public class ejecutor {
 
         System.out.println();
         emp.agregarEquipo(new PCescritorio("012","DELL","D12","10/01/2022","20/08/2024","Teclado y Mouse"));
-     //   emp.listarInventario();
+
         System.out.println();
         emp.agregarEquipo(new Laptop("L002","HP","HP123","15/05/2022","20/08/2024",true));
-     //   emp.listarInventario();
+
         System.out.println();
         emp.agregarEquipo(new Servidor("S001","HP","H526","12/01/2022","12/03/2030",6));
-        //emp.listarInventario();
+
 
 // Menu
         Scanner scanner = new Scanner(System.in);
@@ -27,8 +27,10 @@ public class ejecutor {
             System.out.println("2️⃣  Listado de equipos");
             System.out.println("3️⃣  Ver estado de equipos próximos a renovar");
             System.out.println("4️⃣  Buscar equipos por código");
-            System.out.println("5️⃣  Eliminar un equipo");
-            System.out.println("6️⃣  Salir");
+            System.out.println("5️⃣  Asignar equipo a área");
+            System.out.println("6️⃣  Mostrar equipos por área");
+            System.out.println("7️⃣  Eliminar un equipo");
+            System.out.println("8️⃣  Salir");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
             scanner.nextLine();
@@ -138,13 +140,70 @@ public class ejecutor {
                             System.out.println(e.getMessage());
                         }
                         System.out.print("\n¿Desea buscar otro equipo? (si/no): ");
+
                     } while (scanner.nextLine().trim().equalsIgnoreCase("si"));
                     break;
+
                 case 5:
-                    System.out.println("\nEliminar un equipo");
-                    // Aquí deberías implementar la lógica para eliminar un equipo
+
+                    System.out.print("\nIngrese el código del equipo a asignar: ");
+                    String codigoAsignar = scanner.nextLine();
+                    System.out.print("Ingrese el área a la que desea asignar el equipo (Marketing/Tecnologia/Finanzas): ");
+                    String areaAsignar = scanner.nextLine().trim().toLowerCase();
+
+                    Inventario equipoAsignar = null;
+                    for (Inventario inv : emp.getListaInventario()) {
+                        if (inv.getCodigo().equalsIgnoreCase(codigoAsignar)) {
+                            equipoAsignar = inv;
+                            break;
+                        }
+                    }
+
+                    if (equipoAsignar != null) {
+                        try {
+                            emp.asignarEquipoArea(areaAsignar, equipoAsignar);
+                        } catch (ExceptionInventarioChecked e) {
+                            System.out.println(e.getMessage());
+                        }
+                    } else {
+                        System.out.println("No se encontró ningún equipo con el código especificado.");
+                    }
+
+                    System.out.print("\n¿Desea realizar alguna acción más? (si/no): ");
+                    String continuar = scanner.nextLine().trim().toLowerCase();
+                    if (continuar.equals("si")) {
+                        break;
+                    } else if (continuar.equals("no")) {
+                        opcion = 8; // Sale del bucle
+                    } else {
+                        System.out.println("Opción no válida. Se cerrará el programa.");
+                        opcion = 8; // Sale del bucle
+                    }
+
                     break;
                 case 6:
+                    System.out.print("\nIngrese el área para mostrar sus equipos (Marketing/Tecnologia/Finanzas): ");
+                    String areaMostrar = scanner.nextLine().trim().toLowerCase();
+                    try {
+                        emp.mostrarEquiposPorArea(areaMostrar);
+                    } catch (ExceptionInventarioChecked e) {
+                        System.out.println(e.getMessage());
+                    }
+                    System.out.print("\n¿Desea realizar alguna acción más? (si/no): ");
+                    String continuarCase5 = scanner.nextLine().trim().toLowerCase();
+                    if (continuarCase5.equals("si")) {
+                        break;
+                    } else if (continuarCase5.equals("no")) {
+                        opcion = 8; // Sale del bucle
+                    } else {
+                        System.out.println("Opción no válida. Se cerrará el programa.");
+                        opcion = 8; // Sale del bucle
+                    }
+
+                    break;
+                case 7:
+                  // eliminar equipo
+                case 8:
                     System.out.println("\nSaliendo del programa...");
                     break;
                 default:
@@ -152,7 +211,7 @@ public class ejecutor {
             }
 
             System.out.println(); // Imprimir una línea en blanco para mejor legibilidad
-        } while (opcion != 6);
+        } while (opcion != 8);
 
         scanner.close(); // Cerrar el scanner al salir del programa
     }

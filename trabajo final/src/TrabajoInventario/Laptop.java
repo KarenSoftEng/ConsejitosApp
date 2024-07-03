@@ -9,7 +9,9 @@ public class Laptop extends Inventario{
         super(codigo, marca, modelo, fechaRegistro, fechaBajaEquipo);
         this.incluyeCooler = incluyeCooler;
     }
-
+    public boolean isIncluyeCooler() {
+        return incluyeCooler;
+    }
     @Override
     public String toString() {
         return "Laptop {" +
@@ -17,4 +19,17 @@ public class Laptop extends Inventario{
                 ", incluyeCooler=" + incluyeCooler +
                 '}';
     }
+
+
+    @Override
+    public void mostrarDetalles() {
+        System.out.println("Laptop:");
+        System.out.println("Código: " + getCodigo());
+        System.out.println("Marca: " + getMarca());
+        System.out.println("Modelo: " + getModelo());
+        System.out.println("Fecha de Registro: " + getFechaRegistro());
+        System.out.println("Fecha de Baja: " + getFechaBajaEquipo());
+        System.out.println("Incluye Cooler: " + isIncluyeCooler());
+    }
+
 }

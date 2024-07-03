@@ -2,7 +2,7 @@ package TrabajoInventario;
 
 import java.time.LocalDate;
 
-public class Inventario {
+public abstract  class Inventario {
     private String Codigo;
     private String Marca;
     private String Modelo;
@@ -10,9 +10,9 @@ public class Inventario {
     private String fechaBajaEquipo;
 
     public Inventario(String codigo, String marca, String modelo, String fechaRegistro, String fechaBajaEquipo) {
-        Codigo = codigo;
-        Marca = marca;
-        Modelo = modelo;
+        this.Codigo = codigo;
+        this.Marca = marca;
+        this.Modelo = modelo;
         this.fechaRegistro = fechaRegistro;
         this.fechaBajaEquipo = fechaBajaEquipo;
     }
@@ -46,26 +46,7 @@ public class Inventario {
         return fechaBajaEquipo;
     }
 
-
-    public void setCodigo(String codigo) {
-        Codigo = codigo;
-    }
-
-    public void setMarca(String marca) {
-        Marca = marca;
-    }
-
-    public void setModelo(String modelo) {
-        Modelo = modelo;
-    }
-
-    public void setFechaRegistro(String fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-    public void setFechaBajaEquipo(String fechaBajaEquipo) {
-        this.fechaBajaEquipo = fechaBajaEquipo;
-    }
+    public abstract void mostrarDetalles();
 
 
 }
