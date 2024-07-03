@@ -12,9 +12,9 @@ public class PCescritorio extends Inventario{
 
     @Override
     public String toString() {
-        return "PCescritorio{" +
+        return "PCescritorio {" +
                 super.toString()+
-                "Accesorios='" + Accesorios + '\'' +
+                ", Accesorios='" + Accesorios + '\'' +
                 '}';
     }
 }

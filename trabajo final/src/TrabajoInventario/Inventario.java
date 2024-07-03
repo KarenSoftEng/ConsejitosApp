@@ -19,12 +19,53 @@ public class Inventario {
 
     @Override
     public String toString() {
-        return "Inventario{" +
-                "Codigo='" + Codigo + '\'' +
+        return " Codigo='" + Codigo + '\'' +
                 ", Marca='" + Marca + '\'' +
                 ", Modelo='" + Modelo + '\'' +
                 ", fechaRegistro=" + fechaRegistro +
-                ", fechaBajaEquipo=" + fechaBajaEquipo +
-                '}';
+                ", fechaBajaEquipo=" + fechaBajaEquipo;
     }
+
+    public String getCodigo() {
+        return Codigo;
+    }
+
+    public String getMarca() {
+        return Marca;
+    }
+
+    public String getModelo() {
+        return Modelo;
+    }
+
+    public String getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public String getFechaBajaEquipo() {
+        return fechaBajaEquipo;
+    }
+
+
+    public void setCodigo(String codigo) {
+        Codigo = codigo;
+    }
+
+    public void setMarca(String marca) {
+        Marca = marca;
+    }
+
+    public void setModelo(String modelo) {
+        Modelo = modelo;
+    }
+
+    public void setFechaRegistro(String fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public void setFechaBajaEquipo(String fechaBajaEquipo) {
+        this.fechaBajaEquipo = fechaBajaEquipo;
+    }
+
+
 }

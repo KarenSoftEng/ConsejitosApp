@@ -5,17 +5,16 @@ import java.util.Scanner;
 public class ejecutor {
     public static void main(String[] args) {
         Empresa emp = new Empresa("TI","Lima");
-   //     emp.agregarInventario(new Inventario("1234","Lenovo","L34","23Junio2023","15Julio2024"));
-        emp.listarInventario();
+
         System.out.println();
-     //   emp.agregarInventario(new PCescritorio("012","DELL","D12","10Enero2022","20Agosto2024","Teclado y Mouse"));
-        emp.listarInventario();
+        emp.agregarEquipo(new PCescritorio("012","DELL","D12","10/01/2022","20/08/2024","Teclado y Mouse"));
+     //   emp.listarInventario();
         System.out.println();
-    //    emp.agregarInventario(new Laptop("L002","HP","HP123","15Mayo2022","20Agosto2024",true));
-        emp.listarInventario();
+        emp.agregarEquipo(new Laptop("L002","HP","HP123","15/05/2022","20/08/2024",true));
+     //   emp.listarInventario();
         System.out.println();
-    //    emp.agregarInventario(new Servidor("S001","HP","H526","12Enero2000","12Marzo2030",6));
-        emp.listarInventario();
+        emp.agregarEquipo(new Servidor("S001","HP","H526","12/01/2022","12/03/2030",6));
+        //emp.listarInventario();
 
 // Menu
         Scanner scanner = new Scanner(System.in);
@@ -52,9 +51,9 @@ public class ejecutor {
                                 String marca = scanner.nextLine();
                                 System.out.print("Ingrese el modelo del equipo: ");
                                 String modelo = scanner.nextLine();
-                                System.out.print("Ingrese la fecha de registro (ddMMyyyy): ");
+                                System.out.print("Ingrese la fecha de registro (dd/mm/yyyy): ");
                                 String fechaRegistro = scanner.nextLine();
-                                System.out.print("Ingrese la fecha de baja del equipo (ddMMyyyy): ");
+                                System.out.print("Ingrese la fecha de baja del equipo (dd/mm/yyyy): ");
                                 String fechaBajaEquipo = scanner.nextLine();
                                 System.out.print("Ingrese accesorios:");
                                 String accesorios = scanner.nextLine();
@@ -73,9 +72,9 @@ public class ejecutor {
                                 String marcab = scanner.nextLine();
                                 System.out.print("Ingrese el modelo del equipo: ");
                                 String modelob = scanner.nextLine();
-                                System.out.print("Ingrese la fecha de registro (ddMMyyyy): ");
+                                System.out.print("Ingrese la fecha de registro (dd/mm/yyyy): ");
                                 String fechaRegistrob = scanner.nextLine();
-                                System.out.print("Ingrese la fecha de baja del equipo (ddMMyyyy): ");
+                                System.out.print("Ingrese la fecha de baja del equipo (dd/mm/yyyy): ");
                                 String fechaBajaEquipob = scanner.nextLine();
                                 System.out.print("Incluye Cooler?(true/false):");
                                  Boolean incluyeCoolerb = scanner.nextBoolean();
@@ -94,9 +93,9 @@ public class ejecutor {
                                 String marcac = scanner.nextLine();
                                 System.out.print("Ingrese el modelo del equipo: ");
                                 String modeloc = scanner.nextLine();
-                                System.out.print("Ingrese la fecha de registro (ddMMyyyy): ");
+                                System.out.print("Ingrese la fecha de registro (dd/mm/yyyy): ");
                                 String fechaRegistroc = scanner.nextLine();
-                                System.out.print("Ingrese la fecha de baja del equipo (ddMMyyyy): ");
+                                System.out.print("Ingrese la fecha de baja del equipo (dd/mm/yyyy): ");
                                 String fechaBajaEquipoc = scanner.nextLine();
                                 System.out.print("Ingrese la cantidad de discos:");
                                 int CantidadDiscosc = scanner.nextInt();
@@ -116,17 +115,30 @@ public class ejecutor {
                     } while (scanner.nextLine().trim().equalsIgnoreCase("si"));
                     break;
                 case 2:
-                    System.out.println("\nSe muestra el listado de equipos:");
-                    // Aquí deberías llamar al método que lista los equipos de la empresa
-                    // emp.listarEquipos();
+
+                    do {
+                        System.out.println("\nSe muestra el listado de equipos:");
+                        emp.listarInventario();
+
+                        System.out.print("\n¿Desea realizar otra acción? (si/no): ");
+                    } while (scanner.nextLine().trim().equalsIgnoreCase("si"));
                     break;
+
                 case 3:
                     System.out.println("\nEquipos próximos a renovar:");
                     // Aquí deberías implementar la lógica para mostrar equipos próximos a renovar
                     break;
                 case 4:
-                    System.out.println("\nIngrese el código del equipo a buscar:");
-                    // Aquí deberías implementar la lógica para buscar un equipo por código
+                    do {
+                        System.out.print("\nIngrese el código del equipo a buscar: ");
+                        String codigoBuscar = scanner.nextLine();
+                        try {
+                            emp.buscarEquipoPorCodigo(codigoBuscar);
+                        } catch (ExceptionInventarioChecked e) {
+                            System.out.println(e.getMessage());
+                        }
+                        System.out.print("\n¿Desea buscar otro equipo? (si/no): ");
+                    } while (scanner.nextLine().trim().equalsIgnoreCase("si"));
                     break;
                 case 5:
                     System.out.println("\nEliminar un equipo");

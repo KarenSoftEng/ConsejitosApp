@@ -12,9 +12,9 @@ public class Laptop extends Inventario{
 
     @Override
     public String toString() {
-        return "Laptop{" +
+        return "Laptop {" +
                 super.toString()+
-                "incluyeCooler=" + incluyeCooler +
+                ", incluyeCooler=" + incluyeCooler +
                 '}';
     }
 }

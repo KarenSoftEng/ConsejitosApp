@@ -12,9 +12,9 @@ public class Servidor extends Inventario{
 
     @Override
     public String toString() {
-        return "Servidor{" +
+        return "Servidor {" +
                 super.toString()+
-                "CantidadDiscos=" + CantidadDiscos +
+                ", CantidadDiscos=" + CantidadDiscos +
                 '}';
     }
 }
