@@ -25,12 +25,11 @@ public class ejecutor {
             System.out.println("\nMenú:");
             System.out.println("1️⃣  Ingresar nuevo equipo");
             System.out.println("2️⃣  Listado de equipos");
-            System.out.println("3️⃣  Ver estado de equipos próximos a renovar");
-            System.out.println("4️⃣  Buscar equipos por código");
-            System.out.println("5️⃣  Asignar equipo a área");
-            System.out.println("6️⃣  Mostrar equipos por área");
-            System.out.println("7️⃣  Eliminar un equipo");
-            System.out.println("8️⃣  Salir");
+            System.out.println("3️⃣  Buscar equipos por código");
+            System.out.println("4️⃣  Asignar equipo a área");
+            System.out.println("5️⃣  Mostrar equipos por área");
+            System.out.println("6️⃣  Eliminar un equipo");
+            System.out.println("7️⃣  Salir");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
             scanner.nextLine();
@@ -118,19 +117,22 @@ public class ejecutor {
                     break;
                 case 2:
 
-                    do {
-                        System.out.println("\nSe muestra el listado de equipos:");
-                        emp.listarInventario();
+                    System.out.println("\nSe muestra el listado de equipos:");
+                    emp.listarInventario();
 
-                        System.out.print("\n¿Desea realizar otra acción? (si/no): ");
-                    } while (scanner.nextLine().trim().equalsIgnoreCase("si"));
+                    System.out.print("\n¿Desea realizar otra acción? (si/no): ");
+                    String continuarCase2 = scanner.nextLine().trim().toLowerCase();
+                    if (continuarCase2.equals("si")) {
+                        break;
+                    } else if (continuarCase2.equals("no")) {
+                        opcion = 7; // Salir del programa
+                    } else {
+                        System.out.println("Opción no válida. Se cerrará el programa.");
+                        opcion = 7; // Salir del programa
+                    }
                     break;
 
                 case 3:
-                    System.out.println("\nEquipos próximos a renovar:");
-                    // Aquí deberías implementar la lógica para mostrar equipos próximos a renovar
-                    break;
-                case 4:
                     do {
                         System.out.print("\nIngrese el código del equipo a buscar: ");
                         String codigoBuscar = scanner.nextLine();
@@ -144,7 +146,7 @@ public class ejecutor {
                     } while (scanner.nextLine().trim().equalsIgnoreCase("si"));
                     break;
 
-                case 5:
+                case 4:
 
                     System.out.print("\nIngrese el código del equipo a asignar: ");
                     String codigoAsignar = scanner.nextLine();
@@ -174,14 +176,14 @@ public class ejecutor {
                     if (continuar.equals("si")) {
                         break;
                     } else if (continuar.equals("no")) {
-                        opcion = 8; // Sale del bucle
+                        opcion = 7; // Sale del bucle
                     } else {
                         System.out.println("Opción no válida. Se cerrará el programa.");
-                        opcion = 8; // Sale del bucle
+                        opcion = 7; // Sale del bucle
                     }
 
                     break;
-                case 6:
+                case 5:
                     System.out.print("\nIngrese el área para mostrar sus equipos (Marketing/Tecnologia/Finanzas): ");
                     String areaMostrar = scanner.nextLine().trim().toLowerCase();
                     try {
@@ -194,16 +196,34 @@ public class ejecutor {
                     if (continuarCase5.equals("si")) {
                         break;
                     } else if (continuarCase5.equals("no")) {
-                        opcion = 8; // Sale del bucle
+                        opcion = 7; // Sale del bucle
                     } else {
                         System.out.println("Opción no válida. Se cerrará el programa.");
-                        opcion = 8; // Sale del bucle
+                        opcion = 7; // Sale del bucle
                     }
 
                     break;
+                case 6:
+                    System.out.print("\nIngrese el código del equipo a eliminar: ");
+                    String codigoEliminar = scanner.nextLine().trim().toLowerCase();
+                    try {
+                        emp.eliminarEquipoPorCodigo(codigoEliminar);
+                    } catch (ExceptionInventarioChecked e) {
+                        System.out.println(e.getMessage());
+                    }
+                    System.out.print("\n¿Desea realizar alguna acción más? (si/no): ");
+                    String continuarCase7 = scanner.nextLine().trim().toLowerCase();
+                    if (continuarCase7.equals("si")) {
+                        break;
+                    } else if (continuarCase7.equals("no")) {
+                        opcion = 7; // Sale del bucle
+                    } else {
+                        System.out.println("Opción no válida. Se cerrará el programa.");
+                        opcion = 7; // Sale del bucle
+                    }
+                    break;
+
                 case 7:
-                  // eliminar equipo
-                case 8:
                     System.out.println("\nSaliendo del programa...");
                     break;
                 default:
@@ -211,7 +231,7 @@ public class ejecutor {
             }
 
             System.out.println(); // Imprimir una línea en blanco para mejor legibilidad
-        } while (opcion != 8);
+        } while (opcion != 7);
 
         scanner.close(); // Cerrar el scanner al salir del programa
     }

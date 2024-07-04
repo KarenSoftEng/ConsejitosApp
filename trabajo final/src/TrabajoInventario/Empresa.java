@@ -105,4 +105,26 @@ public class Empresa {
 
 
     };
+
+    public void eliminarEquipoPorCodigo(String codigo) throws ExceptionInventarioChecked {
+        Inventario equipoEliminar = null;
+        for (Inventario inv : listaInventario) {
+            if (inv.getCodigo().equalsIgnoreCase(codigo)){
+                equipoEliminar = inv;
+                break;
+            }
+        }
+        if (equipoEliminar == null) {
+            throw new ExceptionInventarioChecked("No se encontró el equipo con el código: " + codigo);
+        }
+
+        if (marketingEquipos.contains(equipoEliminar) ||
+                tecnologiaEquipos.contains(equipoEliminar) ||
+                finanzasEquipos.contains(equipoEliminar)) {
+            throw new ExceptionInventarioChecked("El equipo está asignado a un área y no puede ser eliminado.");
+        }
+
+        listaInventario.remove(equipoEliminar);
+        System.out.println("Equipo eliminado correctamente.");
+    }
 }
